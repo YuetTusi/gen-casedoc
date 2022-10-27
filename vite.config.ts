@@ -5,6 +5,7 @@ import optimizer from 'vite-plugin-optimizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   resolve: {
     alias: {
       '@': join(__dirname, './src')
@@ -12,7 +13,8 @@ export default defineConfig({
     extensions: ['.json', '.js', '.mjs', '.ts', '.tsx']
   },
   server: {
-    port: 4000
+    port: 4000,
+    strictPort: false
   },
   plugins: [
     react(),

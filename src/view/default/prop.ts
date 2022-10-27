@@ -4,5 +4,6 @@ export interface FormValue {
     client: string,
     tel: string,
     address: string,
-    founder: string
+    founder: string,
+    org: string
 }

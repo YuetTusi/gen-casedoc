@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { app, BrowserWindow } from 'electron';
 import { bindHandle } from './bind';
 
@@ -17,8 +18,14 @@ app.on('ready', () => {
         }
     });
 
-    mainWindow.loadURL('http://127.0.0.1:4000/');
-    mainWindow.webContents.openDevTools();
+    if (process.env['NODE_ENV'] === 'development') {
+        mainWindow.loadURL('http://127.0.0.1:4000/');
+        mainWindow.webContents.openDevTools();
+    } else {
+        mainWindow.loadFile(join(__dirname, 'index.html'));
+    }
+
+    mainWindow.setMenu(null);
 
     bindHandle(mainWindow);
 });
