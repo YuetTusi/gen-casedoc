@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import electron from 'electron';
 import { FC } from 'react';
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+import FileWordOutlined from '@ant-design/icons/FileWordOutlined';
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import { Button, Input, Form, message, Col, Row, Divider } from 'antd';
 import {
     Packer, Document, Paragraph, TextRun, Header, AlignmentType, UnderlineType,
@@ -10,6 +11,7 @@ import {
 } from 'docx';
 import { Evidence, FormValue } from './prop';
 import { DocText } from '@/util/draw';
+import Panel from '@/component/panel';
 
 const { shell, ipcRenderer } = electron;
 const { Item, List, useForm } = Form;
@@ -231,23 +233,27 @@ const Default: FC<{}> = () => {
     };
 
     return <>
-        <h2>初检确认表生成</h2>
         <div>
-            <Button onClick={() => writeDoc()} type="primary">生成</Button>
+            <Button onClick={() => writeDoc()} type="primary">
+                <FileWordOutlined />
+                <span>生成</span>
+            </Button>
         </div>
         <div>
             <Form form={formRef} layout="horizontal">
-                <Row>
-                    <Col span={8}>
-                        <Item
-                            rules={[{ required: true, message: '档案编号' }]}
-                            initialValue="GD20222376"
-                            label="档案编号"
-                            name="docNo">
-                            <Input />
-                        </Item>
-                    </Col>
-                </Row>
+                <Panel>
+                    <Row>
+                        <Col span={8}>
+                            <Item
+                                rules={[{ required: true, message: '档案编号' }]}
+                                initialValue="GD20222376"
+                                label="档案编号"
+                                name="docNo">
+                                <Input />
+                            </Item>
+                        </Col>
+                    </Row>
+                </Panel>
                 <Row>
                     <Col span={8}>
                         <Item
@@ -316,12 +322,13 @@ const Default: FC<{}> = () => {
                             </Row>
                             {
                                 fields.map(({ key, name, ...rest }) => {
-                                    return <div key={`RK_${key}`}>
-                                        <Divider orientation="left">
+                                    return <Panel
+                                        title={<Divider orientation="left">
                                             <Button onClick={() => remove(name)} type="default">
                                                 <DeleteOutlined />
                                             </Button>
-                                        </Divider>
+                                        </Divider>}
+                                        key={`RK_${key}`}>
                                         <Row>
                                             <Col span={8}>
                                                 <Item label="物品名称" name={[name, 'eviName']} {...rest}>
@@ -351,7 +358,7 @@ const Default: FC<{}> = () => {
                                                 </Item>
                                             </Col>
                                         </Row>
-                                    </div>
+                                    </Panel>
                                 })
                             }
                         </>

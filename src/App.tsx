@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { GlobalStyle } from './styled/global';
 import { ConfigProvider, Empty } from 'antd';
 import ViewRouter from '@/router';
 import 'antd/dist/antd.less';
@@ -15,6 +16,7 @@ ReactDOM.createRoot($root).render(
       }>
       <ViewRouter />
     </ConfigProvider>
+    <GlobalStyle />
   </React.StrictMode>
 );
 

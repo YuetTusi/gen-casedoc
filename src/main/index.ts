@@ -10,6 +10,8 @@ app.on('ready', () => {
         title: 'demo',
         width: 1200,
         height: 900,
+        minHeight: 600,
+        minWidth: 940,
         show: true,
         webPreferences: {
             javascript: true,
