@@ -25,7 +25,7 @@ app.on('ready', () => {
         mainWindow.loadFile(join(__dirname, 'index.html'));
     }
 
-    mainWindow.setMenu(null);
+    // mainWindow.setMenu(null);
 
     bindHandle(mainWindow);
 });

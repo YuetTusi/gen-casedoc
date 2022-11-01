@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ConfigProvider, Empty } from 'antd';
 import ViewRouter from '@/router';
-import 'antd/dist/antd.min.css';
+import 'antd/dist/antd.less';
 
 const $root = document.querySelector('#root')!;
 

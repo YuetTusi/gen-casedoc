@@ -2,6 +2,11 @@ import { join } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import optimizer from 'vite-plugin-optimizer';
+import { getThemeVariables } from 'antd/dist/theme';
+import { cyan } from './config/theme';
+import { libs } from './config/libs';
+
+console.log(cyan, libs);
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -16,12 +21,19 @@ export default defineConfig({
     port: 4000,
     strictPort: false
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+        modifyVars: {
+          ...getThemeVariables({ dark: false }),
+          ...cyan
+        }
+      }
+    }
+  },
   plugins: [
     react(),
-    optimizer({
-      'fs': 'const fs=require("fs");export default fs;',
-      'path': 'const path=require("path");export default path;',
-      'electron': `const electron=require('electron');export default electron;`
-    })
+    optimizer(libs)
   ],
 })
