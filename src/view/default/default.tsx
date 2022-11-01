@@ -9,15 +9,19 @@ import {
     Packer, Document, Paragraph, TextRun, Header, AlignmentType, UnderlineType,
     Table, TableCell, TableRow, WidthType
 } from 'docx';
-import { Evidence, FormValue } from './prop';
+import { useStore } from '@/model';
 import { DocText } from '@/util/draw';
 import Panel from '@/component/panel';
+import { Evidence, FormValue } from './prop';
 
 const { shell, ipcRenderer } = electron;
 const { Item, List, useForm } = Form;
 
 const Default: FC<{}> = () => {
 
+    const { setReading } = useStore(selector => ({
+        setReading: selector.setReading
+    }));
     const [formRef] = useForm<FormValue>();
 
     const writeDoc = async () => {
@@ -31,7 +35,7 @@ const Default: FC<{}> = () => {
             if (filePaths.length === 0) {
                 return;
             }
-
+            setReading(true);
             // const eviRow = new TableRow({
             //     children: [
             //         new TableCell({
@@ -229,17 +233,19 @@ const Default: FC<{}> = () => {
             shell.openPath(savePath);
         } catch (error) {
             console.warn(error);
+        } finally {
+            setReading(false);
         }
     };
 
     return <>
-        <div>
+        <div className="search-bar">
             <Button onClick={() => writeDoc()} type="primary">
                 <FileWordOutlined />
                 <span>生成</span>
             </Button>
         </div>
-        <div>
+        <div className="scroll-box">
             <Form form={formRef} layout="horizontal">
                 <Panel>
                     <Row>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { GlobalStyle } from './styled/global';
 import { ConfigProvider, Empty } from 'antd';
 import ViewRouter from '@/router';
+import Reading from './component/reading';
 import 'antd/dist/antd.less';
 
 const $root = document.querySelector('#root')!;
@@ -15,6 +16,7 @@ ReactDOM.createRoot($root).render(
         <Empty description="暂无数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       }>
       <ViewRouter />
+      <Reading />
     </ConfigProvider>
     <GlobalStyle />
   </React.StrictMode>

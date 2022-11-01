@@ -86,6 +86,20 @@ export const PageBox = styled.div`
         left:0;
         bottom:0;
         right: 0;
-        padding: 10px;
+        padding: 20px;
+    }
+    .search-bar{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .scroll-box{
+        position: absolute;
+        top:60px;
+        left:20px;
+        right:20px;
+        bottom:0;
+        overflow-y: auto;
     }
 `;
