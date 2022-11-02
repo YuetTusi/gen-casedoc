@@ -11,7 +11,7 @@ export const LayoutBox = styled.div`
 
     &>.menu{
         flex:none;
-        width: 240px;
+        width: 200px;
         background-color: #303a44;
 
         &>.caption{
@@ -31,7 +31,7 @@ export const LayoutBox = styled.div`
         }
 
         ul{
-            margin:0;
+            margin:20px 0 0 0;
             padding: 0;
         }
         li{

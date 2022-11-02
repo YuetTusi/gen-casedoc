@@ -1,10 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import localforage from 'localforage';
 import { GlobalStyle } from './styled/global';
 import { ConfigProvider, Empty } from 'antd';
 import ViewRouter from '@/router';
 import Reading from './component/reading';
 import 'antd/dist/antd.less';
+
+localforage.config({
+  driver: [localforage.INDEXEDDB, localforage.WEBSQL]
+});
 
 const $root = document.querySelector('#root')!;
 
