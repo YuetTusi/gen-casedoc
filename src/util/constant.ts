@@ -1,4 +1,4 @@
 /**
  * 机构编号（固定）
  */
-export const ORG_NO = 'GD-CX-04-002';
+export const ORG_NO = 'WSHT-CX-04-005';

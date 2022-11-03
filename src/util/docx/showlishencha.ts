@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import electron from 'electron';
 import {
-    Packer, Document, Paragraph, TextRun, Header, AlignmentType, UnderlineType,
-    Table, TableCell, TableRow, WidthType, VerticalAlign
+    Packer, Document, AlignmentType,
+    Table, TableRow, WidthType
 } from 'docx';
 import { GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
+import { ORG_NO } from '../constant';
 
 /**
  * 生成受理审查表
@@ -22,7 +22,7 @@ export const showLiShenCha = async (genData: GenData, setting: SettingDoc, to: s
                 default: Draw.header([
                     Draw.song(`档案编号：${setting?.fileNo ?? ''}`, 18),
                     Draw.song('                                       '),
-                    Draw.song(setting?.orgNo ?? '', 18)
+                    Draw.song(ORG_NO ?? '', 18)
                 ])
             },
             children: [

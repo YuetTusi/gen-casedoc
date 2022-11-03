@@ -1,12 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import electron from 'electron';
 import {
     Packer, Document, AlignmentType,
     Table, TableRow, WidthType, TableCell, VerticalAlign
 } from 'docx';
 import { Evidence, GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
+import { ORG_NO } from '../constant';
 
 /**
  * 动态绘制检材行
@@ -79,7 +79,7 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
                 default: Draw.header([
                     Draw.song(`档案编号：${setting?.fileNo ?? ''}`, 18),
                     Draw.song('                                       '),
-                    Draw.song(setting?.orgNo ?? '', 18)
+                    Draw.song(ORG_NO ?? '', 18)
                 ])
             },
             children: [
