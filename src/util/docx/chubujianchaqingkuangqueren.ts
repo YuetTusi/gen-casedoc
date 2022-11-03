@@ -3,10 +3,67 @@ import path from 'path';
 import electron from 'electron';
 import {
     Packer, Document, AlignmentType,
-    Table, TableRow, WidthType
+    Table, TableRow, WidthType, TableCell, VerticalAlign
 } from 'docx';
-import { GenData, SettingDoc } from "@/type/doc";
+import { Evidence, GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
+
+/**
+ * 动态绘制检材行
+ */
+const drawEvidenceRow = (evi: Evidence[]) => {
+
+    let rows: TableRow[] = [];
+
+    evi.forEach((item, i) => {
+        for (let j = 0; j < 3; j++) {
+            let cells: TableCell[] = [];
+            if (i === 0 && j === 0) {
+                //首行首列计算跨行数
+                cells.push(
+                    new TableCell({
+                        children: [Draw.p([Draw.fangsong('委托物品初检情况')], AlignmentType.CENTER)],
+                        verticalAlign: VerticalAlign.CENTER,
+                        width: { size: 30, type: WidthType.DXA },
+                        rowSpan: evi.length * 3 //每个物品占3行，首列跨行为N*3
+                    })
+                );
+            }
+            switch (j) {
+                case 0:
+                    cells.push(
+                        new TableCell({
+                            children: [Draw.p([Draw.fangsong((i + 1).toString())], AlignmentType.CENTER)],
+                            verticalAlign: VerticalAlign.CENTER,
+                            rowSpan: 3 //编号跨3行
+                        })
+                    );
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong('物品名称')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviName)])], 2));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong('数量')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviCount ?? '')])]));
+                    break;
+                case 1:
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong('特征描述')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviDesc ?? '')])], 4));
+                    break;
+                case 2:
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong('存储容量')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviCapacity ?? '')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong('总计存储')])]));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviTotal ?? '')])], 2));
+                    break;
+            }
+            rows.push(
+                new TableRow({
+                    children: cells
+                })
+            );
+        }
+    });
+
+    return rows;
+}
 
 /**
  * 初步检查情况确认表
@@ -56,6 +113,30 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
                                 Draw.cell([Draw.p([Draw.fangsong(genData.caseName)])], 5),
                             ]
                         }),
+                        ...drawEvidenceRow(genData.evidences),
+                        // new TableRow({
+                        //     children: [
+                        //         new TableCell({
+                        //             children: [Draw.p([Draw.fangsong('委托物品初检情况')])],
+                        //             rowSpan: 3 //每个物品占3行，首列跨行为N*3
+                        //         }),
+                        //         new TableCell({
+                        //             children: [Draw.p([Draw.fangsong('1')])],
+                        //             rowSpan: 3 //每个物品占3行，首列跨行为N*3
+                        //         }),
+                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
+                        //     ]
+                        // }),
+                        // new TableRow({
+                        //     children: [
+                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
+                        //     ]
+                        // }),
+                        // new TableRow({
+                        //     children: [
+                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
+                        //     ]
+                        // }),
                         new TableRow({
                             children: [
                                 Draw.cell([Draw.p([Draw.fangsong('其它须说明的情况：')])], 7),

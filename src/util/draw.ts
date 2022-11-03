@@ -83,7 +83,7 @@ class Draw {
             margins: margins ?? { top: 100, left: 100, bottom: 100, right: 100 },
             width: {
                 size: 0,
-                type: WidthType.DXA
+                type: WidthType.AUTO
             }
         });
     }

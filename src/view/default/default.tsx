@@ -171,7 +171,7 @@ const Default: FC<DefaultProp> = () => {
                         return <>
                             <Row>
                                 <Col span={24}>
-                                    <Button type="default" onClick={() => add()}>
+                                    <Button type="primary" onClick={() => add()}>
                                         <PlusCircleOutlined />
                                         <span>添加检材（物证）</span>
                                     </Button>
@@ -183,6 +183,7 @@ const Default: FC<DefaultProp> = () => {
                                         title={<Divider orientation="left" style={{ marginTop: 0 }}>
                                             <Button onClick={() => remove(name)} type="default" danger={true}>
                                                 <DeleteOutlined />
+                                                <span>删除</span>
                                             </Button>
                                         </Divider>}
                                         key={`RK_${key}`}>
