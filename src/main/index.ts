@@ -8,7 +8,7 @@ app.on('ready', () => {
 
     mainWindow = new BrowserWindow({
         title: 'demo',
-        width: 1200,
+        width: 1280,
         height: 900,
         minHeight: 600,
         minWidth: 940,

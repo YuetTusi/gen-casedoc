@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import localforage from 'localforage';
@@ -5,7 +6,11 @@ import { GlobalStyle } from './styled/global';
 import { ConfigProvider, Empty } from 'antd';
 import ViewRouter from '@/router';
 import Reading from './component/reading';
+import zhCN from 'antd/es/locale/zh_CN';
+import 'moment/locale/zh-cn';
 import 'antd/dist/antd.less';
+
+moment.locale('zh-cn');
 
 localforage.config({
   driver: [localforage.INDEXEDDB, localforage.WEBSQL]
@@ -17,6 +22,7 @@ ReactDOM.createRoot($root).render(
   <React.StrictMode>
     <ConfigProvider
       componentSize="small"
+      locale={zhCN}
       renderEmpty={() =>
         <Empty description="暂无数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       }>
