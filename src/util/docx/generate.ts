@@ -10,9 +10,9 @@ export const generate = async (type: CaseWords, genData: GenData, setting: Setti
 
     switch (type) {
         case CaseWords.ShowLiShenCha_1:
-            return showLiShenCha(genData, setting, to);
+            return await showLiShenCha(genData, setting, to);
         case CaseWords.ChuBuJianChaQingKuangQueRen_3:
-            return chuBuJianChaQingKuangQueRen(genData, setting, to);
+            return await chuBuJianChaQingKuangQueRen(genData, setting, to);
         default:
             console.warn('未知文档类型');
     }

@@ -49,12 +49,16 @@ const Default: FC<DefaultProp> = () => {
                 return;
             }
 
-            // await generate(CaseWords.ShowLiShenCha_1, values, setting!, filePaths[0]);
-            await generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0]);
-
+            setReading(true);
+            await Promise.all([
+                generate(CaseWords.ShowLiShenCha_1, values, setting!, filePaths[0]),
+                generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0])
+            ]);
             message.success('生成成功');
         } catch (error) {
             console.warn(error);
+        } finally {
+            setReading(false);
         }
     }, 500, { leading: true, trailing: false });
 

@@ -113,30 +113,7 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
                                 Draw.cell([Draw.p([Draw.fangsong(genData.caseName)])], 5),
                             ]
                         }),
-                        ...drawEvidenceRow(genData.evidences),
-                        // new TableRow({
-                        //     children: [
-                        //         new TableCell({
-                        //             children: [Draw.p([Draw.fangsong('委托物品初检情况')])],
-                        //             rowSpan: 3 //每个物品占3行，首列跨行为N*3
-                        //         }),
-                        //         new TableCell({
-                        //             children: [Draw.p([Draw.fangsong('1')])],
-                        //             rowSpan: 3 //每个物品占3行，首列跨行为N*3
-                        //         }),
-                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
-                        //     ]
-                        // }),
-                        // new TableRow({
-                        //     children: [
-                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
-                        //     ]
-                        // }),
-                        // new TableRow({
-                        //     children: [
-                        //         Draw.cell([Draw.p([Draw.fangsong('a')])], 5),
-                        //     ]
-                        // }),
+                        ...drawEvidenceRow(genData.evidences ?? []),
                         new TableRow({
                             children: [
                                 Draw.cell([Draw.p([Draw.fangsong('其它须说明的情况：')])], 7),
@@ -161,7 +138,8 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
 
     const chunk = await Packer.toBuffer(doc);
 
-    const savePath = path.join(to, '1.受理审查表.docx');
-    fs.writeFileSync(savePath, chunk);
-    electron.shell.openPath(savePath);
+    const savePath = path.join(to, '3.初步检查情况确认表.docx');
+    return fs.promises.writeFile(savePath, chunk);
+    // fs.writeFileSync(savePath, chunk);
+    // electron.shell.openPath(savePath);
 };
