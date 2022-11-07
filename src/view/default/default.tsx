@@ -23,7 +23,9 @@ const formLayout = {
 
 const Default: FC<DefaultProp> = () => {
 
-    const { setting, setReading, querySettingData } = useStore(selector => ({
+    const {
+        setting, setReading, querySettingData
+    } = useStore(selector => ({
         setReading: selector.setReading,
         setting: selector.settingData,
         querySettingData: selector.querySettingData
@@ -52,7 +54,8 @@ const Default: FC<DefaultProp> = () => {
             setReading(true);
             await Promise.all([
                 generate(CaseWords.ShowLiShenCha_1, values, setting!, filePaths[0]),
-                generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0])
+                generate(CaseWords.ShowLiTongZhiShu_2, values, setting!, filePaths[0]),
+                generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0]),
             ]);
             message.success('生成成功');
         } catch (error) {
@@ -187,7 +190,7 @@ const Default: FC<DefaultProp> = () => {
                                         title={<Divider orientation="left" style={{ marginTop: 0 }}>
                                             <Button onClick={() => remove(name)} type="default" danger={true}>
                                                 <DeleteOutlined />
-                                                <span>删除</span>
+                                                <span>删除检材</span>
                                             </Button>
                                         </Divider>}
                                         key={`RK_${key}`}>

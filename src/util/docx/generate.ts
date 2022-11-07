@@ -1,6 +1,7 @@
 import { GenData, SettingDoc } from "@/type/doc";
 import { CaseWords } from "@/type/word";
 import { showLiShenCha } from './showlishencha';
+import { showLiTongZhiShu } from './shoulitongzhishu';
 import { chuBuJianChaQingKuangQueRen } from './chubujianchaqingkuangqueren';
 
 /**
@@ -11,6 +12,8 @@ export const generate = async (type: CaseWords, genData: GenData, setting: Setti
     switch (type) {
         case CaseWords.ShowLiShenCha_1:
             return await showLiShenCha(genData, setting, to);
+        case CaseWords.ShowLiTongZhiShu_2:
+            return await showLiTongZhiShu(genData, setting, to);
         case CaseWords.ChuBuJianChaQingKuangQueRen_3:
             return await chuBuJianChaQingKuangQueRen(genData, setting, to);
         default:

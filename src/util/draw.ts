@@ -42,7 +42,7 @@ class Draw {
             text: value,
             size,
             bold: isBold,
-            font: '仿宋'
+            font: '仿宋',
         });
     }
     /**
