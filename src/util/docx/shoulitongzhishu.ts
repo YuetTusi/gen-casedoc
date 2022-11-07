@@ -57,5 +57,4 @@ export const showLiTongZhiShu = async (genData: GenData, setting: SettingDoc, to
     const chunk = await Packer.toBuffer(doc);
     const savePath = path.join(to, '2.受理通知书.docx');
     await fs.promises.writeFile(savePath, chunk);
-    electron.shell.openPath(savePath);
 };

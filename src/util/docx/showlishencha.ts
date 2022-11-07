@@ -124,6 +124,6 @@ export const showLiShenCha = async (genData: GenData, setting: SettingDoc, to: s
 
     const chunk = await Packer.toBuffer(doc);
     const savePath = path.join(to, '1.受理审查表.docx');
-    return fs.promises.writeFile(savePath, chunk);
+    return await fs.promises.writeFile(savePath, chunk);
     // electron.shell.openPath(savePath);
 };

@@ -11,5 +11,9 @@ export enum CaseWords {
     /**
      * 初步检查情况确认表
      */
-    ChuBuJianChaQingKuangQueRen_3 = 'ChuBuJianChaQingKuangQueRen'
+    ChuBuJianChaQingKuangQueRen_3 = 'ChuBuJianChaQingKuangQueRen',
+    /**
+     * 检案摘要及鉴定要求
+     */
+    JianAnZhaiYaoAndAnJianYaoQiu_4 = 'JianAnZhaiYaoAndAnJianYaoQiu',
 }
