@@ -4,6 +4,7 @@ import { showLiShenCha } from './showlishencha';
 import { showLiTongZhiShu } from './shoulitongzhishu';
 import { chuBuJianChaQingKuangQueRen } from './chubujianchaqingkuangqueren';
 import { jianAnZhaiYaoAndAnJianYaoQiu } from './jiananzhaiyaoandjiandingyaoqiu';
+import { siFaJianDingGaoZhiShu } from './sifajiandinggaozhishu';
 
 /**
  * 生成Word文档
@@ -19,6 +20,8 @@ export const generate = async (type: CaseWords, genData: GenData, setting: Setti
             return await chuBuJianChaQingKuangQueRen(genData, setting, to);
         case CaseWords.JianAnZhaiYaoAndAnJianYaoQiu_4:
             return await jianAnZhaiYaoAndAnJianYaoQiu(genData, setting, to);
+        case CaseWords.SiFaJianDingGaoZhiShu_5:
+            return await siFaJianDingGaoZhiShu(genData, setting, to);
         default:
             console.warn('未知文档类型');
     }
