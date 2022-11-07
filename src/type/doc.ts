@@ -79,6 +79,10 @@ export interface GenData {
      * 委托物品（证物）
      */
     evidences: Evidence[],
+    /**
+     * 收费项目
+     */
+    costItems: CostItem[]
 }
 
 /**
@@ -121,4 +125,18 @@ export interface Evidence {
      * 保存状态
      */
     eviState: string,
+}
+
+/**
+ * 收费项目
+ */
+export interface CostItem {
+    /**
+     * 项目名称
+     */
+    costName: string,
+    /**
+     * 费用
+     */
+    price: string
 }

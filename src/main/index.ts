@@ -11,7 +11,7 @@ app.on('ready', () => {
         width: 1280,
         height: 900,
         minHeight: 600,
-        minWidth: 940,
+        minWidth: 1280,
         show: true,
         webPreferences: {
             javascript: true,

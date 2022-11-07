@@ -19,5 +19,9 @@ export enum CaseWords {
     /**
      * 司法鉴定告知书
      */
-    SiFaJianDingGaoZhiShu_5 = 'SiFaJianDingGaoZhiShu'
+    SiFaJianDingGaoZhiShu_5 = 'SiFaJianDingGaoZhiShu',
+    /**
+     * 司法鉴定收费告知书
+     */
+    JianDingShouFeiGaoZhiShu_6 = 'JianDingShouFeiGaoZhiShu'
 }

@@ -17,7 +17,7 @@ import { helper } from '@/util/helper';
 const { ipcRenderer } = electron;
 const { Item, List, useForm } = Form;
 const formLayout = {
-    labelCol: { span: 8 },
+    labelCol: { span: 10 },
     // wrapperCol: { span: 12 },
 };
 
@@ -57,7 +57,8 @@ const Default: FC<DefaultProp> = () => {
                 generate(CaseWords.ShowLiTongZhiShu_2, values, setting!, filePaths[0]),
                 generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0]),
                 generate(CaseWords.JianAnZhaiYaoAndAnJianYaoQiu_4, values, setting!, filePaths[0]),
-                generate(CaseWords.SiFaJianDingGaoZhiShu_5, values, setting!, filePaths[0])
+                generate(CaseWords.SiFaJianDingGaoZhiShu_5, values, setting!, filePaths[0]),
+                generate(CaseWords.JianDingShouFeiGaoZhiShu_6, values, setting!, filePaths[0]),
             ]);
             message.success('生成成功');
         } catch (error) {
@@ -182,7 +183,7 @@ const Default: FC<DefaultProp> = () => {
                                 <Col span={24}>
                                     <Button type="primary" onClick={() => add()}>
                                         <PlusCircleOutlined />
-                                        <span>添加检材（物证）</span>
+                                        <span>检材（物证）</span>
                                     </Button>
                                 </Col>
                             </Row>
@@ -259,19 +260,59 @@ const Default: FC<DefaultProp> = () => {
                         </>
                     }}
                 </List>
-
+                <List name="costItems">
+                    {(fields, { add, remove }) => {
+                        return <>
+                            <Row style={{ marginTop: '5px' }}>
+                                <Col span={24}>
+                                    <Button type="primary" onClick={() => add()}>
+                                        <PlusCircleOutlined />
+                                        <span>收费项目</span>
+                                    </Button>
+                                </Col>
+                            </Row>
+                            {
+                                fields.map(({ key, name, ...rest }) => {
+                                    return <Panel
+                                        title={<Divider orientation="left" style={{ marginTop: 0 }}>
+                                            <Button onClick={() => remove(name)} type="default" danger={true}>
+                                                <DeleteOutlined />
+                                                <span>删除收费项目</span>
+                                            </Button>
+                                        </Divider>}
+                                        key={`CK_${key}`}>
+                                        <Row>
+                                            <Col span={6}>
+                                                <Item label="项目名称" name={[name, 'costName']} {...rest}>
+                                                    <Input />
+                                                </Item>
+                                            </Col>
+                                            <Col span={6}>
+                                                <Item label="费用" name={[name, 'price']} {...rest}>
+                                                    <Input />
+                                                </Item>
+                                            </Col>
+                                        </Row>
+                                    </Panel>
+                                })
+                            }
+                        </>
+                    }}
+                </List>
                 <Row>
-                    <Col span={8}>
+                    <Col span={6}>
 
                     </Col>
-                    <Col span={8}></Col>
-                    <Col span={8}></Col>
+                    <Col span={6}></Col>
+                    <Col span={6}></Col>
+                    <Col span={6}></Col>
                 </Row>
                 <Row>
-                    <Col span={8}>
+                    <Col span={6}>
                     </Col>
-                    <Col span={8}></Col>
-                    <Col span={8}></Col>
+                    <Col span={6}></Col>
+                    <Col span={6}></Col>
+                    <Col span={6}></Col>
                 </Row>
             </Form>
         </div>
