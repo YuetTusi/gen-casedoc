@@ -7,7 +7,7 @@ var mainWindow: BrowserWindow;
 app.on('ready', () => {
 
     mainWindow = new BrowserWindow({
-        title: 'demo',
+        title: '文档生成',
         width: 1280,
         height: 900,
         minHeight: 600,
