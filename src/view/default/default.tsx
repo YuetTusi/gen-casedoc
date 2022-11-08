@@ -61,6 +61,7 @@ const Default: FC<DefaultProp> = () => {
                 generate(CaseWords.JianDingShouFeiGaoZhiShu_6, values, setting!, filePaths[0]),
                 generate(CaseWords.SiFaJianDingWeiTuoShu_7, values, setting!, filePaths[0]),
                 generate(CaseWords.JianDingCaiLiaoJieShouDengJi_8, values, setting!, filePaths[0]),
+                generate(CaseWords.SiFaJianDingYiJianLingQuTongZhi_9, values, setting!, filePaths[0]),
             ]);
             message.success('生成成功');
         } catch (error) {
