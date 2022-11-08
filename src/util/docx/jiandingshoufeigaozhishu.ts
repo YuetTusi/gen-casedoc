@@ -7,7 +7,7 @@ import {
 } from 'docx';
 import { CostItem, GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
-import { ORG_NO } from '../constant';
+import { ORG_NO, TABLE_WIDTH } from '../constant';
 
 /**
  * 收费段落 
@@ -53,7 +53,7 @@ export const jianDingShouFeiGaoZhiShu = async (genData: GenData, setting: Settin
                     ], AlignmentType.CENTER, { before: 100, after: 100 }),
                     new Table({
                         width: {
-                            size: 9005,
+                            size: TABLE_WIDTH,
                             type: WidthType.DXA
                         },
                         rows: [

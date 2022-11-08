@@ -6,7 +6,7 @@ import {
 } from 'docx';
 import { Evidence, GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
-import { ORG_NO } from '../constant';
+import { ORG_NO, TABLE_WIDTH } from '../constant';
 
 /**
  * 动态绘制检材行
@@ -91,7 +91,7 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
                 ], AlignmentType.RIGHT, { before: 100, after: 100 }),
                 new Table({
                     width: {
-                        size: 9005,
+                        size: TABLE_WIDTH,
                         type: WidthType.DXA
                     },
                     rows: [

@@ -6,7 +6,7 @@ import {
 } from 'docx';
 import { GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
-import { ORG_NO } from '../constant';
+import { ORG_NO, TABLE_WIDTH } from '../constant';
 
 /**
  * 生成受理审查表
@@ -31,7 +31,7 @@ export const showLiShenCha = async (genData: GenData, setting: SettingDoc, to: s
                 ], AlignmentType.CENTER, { before: 100, after: 100 }),
                 new Table({
                     width: {
-                        size: 9005,
+                        size: TABLE_WIDTH,
                         type: WidthType.DXA
                     },
                     rows: [

@@ -6,7 +6,7 @@ import {
 } from 'docx';
 import { GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
-import { ORG_NO } from '../constant';
+import { ORG_NO, TABLE_WIDTH } from '../constant';
 
 /**
  * 4.检案摘要及鉴定要求
@@ -32,7 +32,7 @@ export const jianAnZhaiYaoAndAnJianYaoQiu = async (genData: GenData, setting: Se
                     ], AlignmentType.RIGHT, { before: 100, after: 100 }),
                     new Table({
                         width: {
-                            size: 9005,
+                            size: TABLE_WIDTH,
                             type: WidthType.DXA
                         },
                         rows: [
