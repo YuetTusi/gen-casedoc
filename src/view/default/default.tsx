@@ -5,6 +5,7 @@ import { FC, MouseEvent, useEffect } from 'react';
 import PlusCircleOutlined from '@ant-design/icons/PlusCircleOutlined';
 import FileWordOutlined from '@ant-design/icons/FileWordOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
+import zhCN from 'antd/es/date-picker/locale/zh_CN';
 import { Button, DatePicker, Input, Form, message, Col, Row, Divider } from 'antd';
 import { useStore } from '@/model';
 import Panel from '@/component/panel';
@@ -63,6 +64,7 @@ const Default: FC<DefaultProp> = () => {
                 generate(CaseWords.JianDingCaiLiaoJieShouDengJi_8, values, setting!, filePaths[0]),
                 generate(CaseWords.SiFaJianDingYiJianLingQuTongZhi_9, values, setting!, filePaths[0]),
                 generate(CaseWords.JianDingXiangGuanWuPinCaiLiaoJiaoJie_10, values, setting!, filePaths[0]),
+                generate(CaseWords.JianDingWenShuFuHeDan_17, values, setting!, filePaths[0]),
             ]);
             message.success('生成成功');
         } catch (error) {
@@ -303,7 +305,7 @@ const Default: FC<DefaultProp> = () => {
                         </>
                     }}
                 </List>
-                <Row>
+                {/* <Row>
                     <Col span={6}>
 
                     </Col>
@@ -317,10 +319,9 @@ const Default: FC<DefaultProp> = () => {
                     <Col span={6}></Col>
                     <Col span={6}></Col>
                     <Col span={6}></Col>
-                </Row>
+                </Row> */}
             </Form>
         </div>
-
     </>;
 };
 

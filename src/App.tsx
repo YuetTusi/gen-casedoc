@@ -3,10 +3,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import localforage from 'localforage';
 import { GlobalStyle } from './styled/global';
-import { ConfigProvider, Empty } from 'antd';
+import { ConfigProvider, DatePicker, Empty } from 'antd';
 import ViewRouter from '@/router';
 import Reading from './component/reading';
 import zhCN from 'antd/es/locale/zh_CN';
+import dateLocale from 'antd/es/date-picker/locale/zh_CN';
+
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.less';
 
@@ -26,6 +28,7 @@ ReactDOM.createRoot($root).render(
       renderEmpty={() =>
         <Empty description="暂无数据" image={Empty.PRESENTED_IMAGE_SIMPLE} />
       }>
+      <DatePicker locale={dateLocale} />
       <ViewRouter />
       <Reading />
     </ConfigProvider>

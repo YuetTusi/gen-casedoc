@@ -161,7 +161,7 @@ export const jianDingXiangGuanWuPinCaiLiaoJiaoJie = async (genData: GenData, set
 
     const chunk = await Packer.toBuffer(doc);
     const savePath = path.join(to, '10.鉴定物品材料交接表.docx');
-    // return fs.promises.writeFile(savePath, chunk);
-    fs.writeFileSync(savePath, chunk);
-    electron.shell.openPath(savePath);
+    return fs.promises.writeFile(savePath, chunk);
+    // fs.writeFileSync(savePath, chunk);
+    // electron.shell.openPath(savePath);
 };
