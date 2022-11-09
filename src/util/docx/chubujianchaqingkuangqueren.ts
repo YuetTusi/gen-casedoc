@@ -39,7 +39,7 @@ const drawEvidenceRow = (evi: Evidence[]) => {
                         })
                     );
                     cells.push(Draw.cell([Draw.p([Draw.fangsong('物品名称')])]));
-                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviName)])], 2));
+                    cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviName)])]));
                     cells.push(Draw.cell([Draw.p([Draw.fangsong('数量')])]));
                     cells.push(Draw.cell([Draw.p([Draw.fangsong(item.eviCount ?? '')])]));
                     break;
@@ -123,7 +123,7 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
                             children: [
                                 Draw.cell([Draw.p([Draw.fangsong('初查人签名')])], 2),
                                 Draw.cell([Draw.p([])], 2),
-                                Draw.cell([Draw.p([Draw.fangsong('委托经手人签名')])], 2),
+                                Draw.cell([Draw.p([Draw.fangsong('委托经手人签名')])]),
                                 Draw.cell([Draw.p([])]),
                             ]
                         })
@@ -139,7 +139,7 @@ export const chuBuJianChaQingKuangQueRen = async (genData: GenData, setting: Set
     const chunk = await Packer.toBuffer(doc);
 
     const savePath = path.join(to, '3.初步检查情况确认表.docx');
-    return fs.promises.writeFile(savePath, chunk);
+    return await fs.promises.writeFile(savePath, chunk);
     // fs.writeFileSync(savePath, chunk);
     // electron.shell.openPath(savePath);
 };

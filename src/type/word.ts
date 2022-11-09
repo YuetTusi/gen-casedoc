@@ -36,4 +36,8 @@ export enum CaseWords {
      * 司法鉴定意见领取通知
      */
     SiFaJianDingYiJianLingQuTongZhi_9 = 'SiFaJianDingYiJianLingQuTongZhi',
+    /**
+     * 鉴定物品材料交接表
+     */
+    JianDingXiangGuanWuPinCaiLiaoJiaoJie_10 = 'JianDingXiangGuanWuPinCaiLiaoJiaoJie',
 }
