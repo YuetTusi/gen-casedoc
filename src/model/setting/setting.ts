@@ -1,13 +1,13 @@
 import localforage from 'localforage';
-import { GetState, SetState } from '..';
 import { Doc, SettingDoc } from '@/type/doc';
+import { GetState, SetState } from '..';
 import { SettingState } from '.';
 
 const setting = ((set: SetState, get: GetState): SettingState => ({
 
     settingData: undefined,
 
-    querySettingData: async () => {
+    async querySettingData() {
         set({ reading: true });
         try {
             const next = await localforage.getItem<SettingDoc>(Doc.Setting);
@@ -18,7 +18,7 @@ const setting = ((set: SetState, get: GetState): SettingState => ({
             set({ reading: false });
         }
     },
-    saveSettingData: async (payload: SettingDoc) => {
+    async saveSettingData(payload: SettingDoc) {
         set({ reading: true });
         try {
             const next = await localforage.setItem(Doc.Setting, payload);

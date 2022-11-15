@@ -1,4 +1,3 @@
-import electron from 'electron';
 import fs from 'fs';
 import path from 'path';
 import {
@@ -104,7 +103,7 @@ export const jianDingWenShuFuHeDan = async (genData: GenData, setting: SettingDo
 
     const chunk = await Packer.toBuffer(doc);
     const savePath = path.join(to, '17.鉴定文书复核单.docx');
-    return fs.promises.writeFile(savePath, chunk);
+    return await fs.promises.writeFile(savePath, chunk);
     // fs.writeFileSync(savePath, chunk);
     // electron.shell.openPath(savePath);
 };

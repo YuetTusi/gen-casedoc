@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, ipcMain, IpcMainInvokeEvent } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, IpcMainInvokeEvent } from "electron";
 
 function bindHandle(mainWindow: BrowserWindow) {
 
@@ -27,6 +27,8 @@ function bindHandle(mainWindow: BrowserWindow) {
             return null;
         }
     });
+
+    ipcMain.handle('get-path', (event: IpcMainInvokeEvent, ...args: any[]) => app.getPath(args[0]));
 }
 
 export { bindHandle };

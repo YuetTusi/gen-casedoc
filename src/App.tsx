@@ -8,7 +8,6 @@ import ViewRouter from '@/router';
 import Reading from './component/reading';
 import zhCN from 'antd/es/locale/zh_CN';
 import dateLocale from 'antd/es/date-picker/locale/zh_CN';
-
 import 'moment/locale/zh-cn';
 import 'antd/dist/antd.less';
 

@@ -16,4 +16,10 @@ export const GlobalStyle = createGlobalStyle`
         width: auto;
         height: 100%;
     }
+
+    .zero-padding-modal{
+        .ant-modal-body{
+            padding: 0 !important;
+        }
+    }
 `;

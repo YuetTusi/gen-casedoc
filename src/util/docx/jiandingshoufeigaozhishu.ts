@@ -3,7 +3,7 @@ import path from 'path';
 import nzh from 'nzh';
 import {
     Packer, Document, AlignmentType,
-    Table, TableRow, WidthType, TableCell, HeightRule
+    Table, TableRow, WidthType, TableCell
 } from 'docx';
 import { CostItem, GenData, SettingDoc } from "@/type/doc";
 import { Draw } from '../draw';
@@ -20,10 +20,10 @@ const getCostItems = (items: CostItem[] = []) => {
 
     let total = 0;
 
-    return items.map(({ costName, price }, index) => {
-        total += Number.isNaN(Number.parseFloat(price)) ? 0 : Number.parseFloat(price);
+    return items.map((item, index) => {
+        total += Number.isNaN(Number.parseFloat(item?.price)) ? 0 : Number.parseFloat(item.price);
         return Draw.p([
-            Draw.fangsong(`${index + 1}、项目：${costName ?? ''}，收费：${price ?? ''}元；`)
+            Draw.fangsong(`${index + 1}、项目：${item?.costName ?? ''}，收费：${item?.price ?? ''}元；`)
         ]);
     }).concat([
         Draw.p([

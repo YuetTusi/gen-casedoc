@@ -6,8 +6,6 @@ import { getThemeVariables } from 'antd/dist/theme';
 import { cyan } from './config/theme';
 import { libs } from './config/libs';
 
-console.log(cyan, libs);
-
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',

@@ -1,21 +1,17 @@
 import moment from 'moment';
-import electron from 'electron';
-import debounce from 'lodash/debounce';
-import { FC, MouseEvent, useEffect } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import PlusCircleOutlined from '@ant-design/icons/PlusCircleOutlined';
 import FileWordOutlined from '@ant-design/icons/FileWordOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
-import zhCN from 'antd/es/date-picker/locale/zh_CN';
 import { Button, DatePicker, Input, Form, message, Col, Row, Divider } from 'antd';
 import { useStore } from '@/model';
 import Panel from '@/component/panel';
-import { DefaultProp } from './prop';
+import SaveModal from '@/component/save-modal';
 import { GenData } from '@/type/doc';
 import { generate } from '@/util/docx/generate';
 import { CaseWords } from '@/type/word';
-import { helper } from '@/util/helper';
+import { DefaultProp } from './prop';
 
-const { ipcRenderer } = electron;
 const { Item, List, useForm } = Form;
 const formLayout = {
     labelCol: { span: 10 },
@@ -27,52 +23,53 @@ const Default: FC<DefaultProp> = () => {
     const {
         setting, setReading, querySettingData
     } = useStore(selector => ({
-        setReading: selector.setReading,
         setting: selector.settingData,
+        setReading: selector.setReading,
         querySettingData: selector.querySettingData
     }));
     const [formRef] = useForm<GenData>();
+    const [saveModalOpen, setSaveModalOpen] = useState<boolean>(false);
 
     useEffect(() => { querySettingData() }, []);
+
+    const onSaveClick = async (checkedKeys: string[], saveTo: string) => {
+        message.destroy();
+        if (checkedKeys.length === 0) {
+            message.info('请选择导出文档');
+            return;
+        }
+        const { getFieldsValue } = formRef;
+        const values = getFieldsValue();
+        try {
+            setReading(true);
+            for (let i = 0; i < checkedKeys.length; i++) {
+                await generate(checkedKeys[i] as CaseWords, values, setting!, saveTo);
+            }
+            message.success('文档生成成功');
+            setSaveModalOpen(false);
+        } catch (error) {
+            console.warn(error);
+            message.warn('文档生成失败');
+        } finally {
+            setReading(false);
+        }
+    };
 
     /**
      * 生成Click
      */
-    const genClick = debounce(async (e: MouseEvent<HTMLButtonElement>) => {
+    const genClick = async (e: MouseEvent<HTMLButtonElement>) => {
 
         const { validateFields } = formRef;
         e.preventDefault();
         message.destroy();
         try {
-            const values = await validateFields();
-            const { filePaths } = await ipcRenderer.invoke('show-open-dialog', {
-                properties: ['openDirectory']
-            });
-            if (filePaths.length === 0) {
-                return;
-            }
-
-            setReading(true);
-            await Promise.all([
-                generate(CaseWords.ShowLiShenCha_1, values, setting!, filePaths[0]),
-                generate(CaseWords.ShowLiTongZhiShu_2, values, setting!, filePaths[0]),
-                generate(CaseWords.ChuBuJianChaQingKuangQueRen_3, values, setting!, filePaths[0]),
-                generate(CaseWords.JianAnZhaiYaoAndAnJianYaoQiu_4, values, setting!, filePaths[0]),
-                generate(CaseWords.SiFaJianDingGaoZhiShu_5, values, setting!, filePaths[0]),
-                generate(CaseWords.JianDingShouFeiGaoZhiShu_6, values, setting!, filePaths[0]),
-                generate(CaseWords.SiFaJianDingWeiTuoShu_7, values, setting!, filePaths[0]),
-                generate(CaseWords.JianDingCaiLiaoJieShouDengJi_8, values, setting!, filePaths[0]),
-                generate(CaseWords.SiFaJianDingYiJianLingQuTongZhi_9, values, setting!, filePaths[0]),
-                generate(CaseWords.JianDingXiangGuanWuPinCaiLiaoJiaoJie_10, values, setting!, filePaths[0]),
-                generate(CaseWords.JianDingWenShuFuHeDan_17, values, setting!, filePaths[0]),
-            ]);
-            message.success('生成成功');
+            await validateFields();
+            setSaveModalOpen(true);
         } catch (error) {
             console.warn(error);
-        } finally {
-            setReading(false);
         }
-    }, 500, { leading: true, trailing: false });
+    };
 
     return <>
         <div className="search-bar">
@@ -322,6 +319,10 @@ const Default: FC<DefaultProp> = () => {
                 </Row> */}
             </Form>
         </div>
+        <SaveModal
+            open={saveModalOpen}
+            onCancel={() => setSaveModalOpen(false)}
+            onSave={onSaveClick} />
     </>;
 };
 
