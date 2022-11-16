@@ -1,4 +1,5 @@
 import { Moment } from "moment"
+import { BaseEntity } from "./base-entity"
 
 /**
  * 数据库文档名
@@ -8,6 +9,10 @@ export enum Doc {
      * 设置表
      */
     Setting = 'Setting',
+    /**
+     * 历史记录
+     */
+    History = 'History',
 }
 
 /**
@@ -29,7 +34,7 @@ export interface SettingDoc {
     orgNo: string
 }
 
-export interface GenData {
+export interface GenData extends BaseEntity {
 
     /**
      * 案件名称
@@ -42,47 +47,47 @@ export interface GenData {
     /**
      * 接收时间
      */
-    receiveTime: Moment,
+    receiveTime?: Moment | number,
     /**
      * 检查时间
      */
-    checkTime: Moment
+    checkTime?: Moment | number,
     /**
      * 委托人
      */
-    deleMan: string,
+    deleMan?: string,
     /**
      * 委托单位
      */
-    deleUnit: string,
+    deleUnit?: string,
     /**
      * 承办人
      */
-    undertaker: string,
+    undertaker?: string,
     /**
      * 初查人
      */
-    preMan: string,
+    preMan?: string,
     /**
      * 委托经手人
      */
-    deleHandMan: string,
+    deleHandMan?: string,
     /**
      * 联系人/电话
      */
-    userAndTel: string,
+    userAndTel?: string,
     /**
      * 联系电话
      */
-    tel: string,
+    tel?: string,
     /**
      * 委托物品（证物）
      */
-    evidences: Evidence[],
+    evidences?: Evidence[],
     /**
      * 收费项目
      */
-    costItems: CostItem[]
+    costItems?: CostItem[]
 }
 
 /**

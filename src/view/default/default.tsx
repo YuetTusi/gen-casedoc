@@ -5,6 +5,7 @@ import FileWordOutlined from '@ant-design/icons/FileWordOutlined';
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined';
 import { Button, DatePicker, Input, Form, message, Col, Row, Divider } from 'antd';
 import { useStore } from '@/model';
+import { helper } from '@/util/helper';
 import Panel from '@/component/panel';
 import SaveModal from '@/component/save-modal';
 import { GenData } from '@/type/doc';
@@ -21,11 +22,12 @@ const formLayout = {
 const Default: FC<DefaultProp> = () => {
 
     const {
-        setting, setReading, querySettingData
+        setting, setReading, querySettingData, saveHistory
     } = useStore(selector => ({
         setting: selector.settingData,
         setReading: selector.setReading,
-        querySettingData: selector.querySettingData
+        querySettingData: selector.querySettingData,
+        saveHistory: selector.saveHistory
     }));
     const [formRef] = useForm<GenData>();
     const [saveModalOpen, setSaveModalOpen] = useState<boolean>(false);
@@ -45,6 +47,11 @@ const Default: FC<DefaultProp> = () => {
             for (let i = 0; i < checkedKeys.length; i++) {
                 await generate(checkedKeys[i] as CaseWords, values, setting!, saveTo);
             }
+            values._id = helper.nextId();
+            values.createdTime = values.updatedTime = new Date().getTime();
+            values.checkTime = moment(values.checkTime).valueOf();
+            values.receiveTime = moment(values.receiveTime).valueOf();
+            await saveHistory(values);
             message.success('文档生成成功');
             setSaveModalOpen(false);
         } catch (error) {
